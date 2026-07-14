@@ -1,0 +1,53 @@
+---
+import { site } from "../data/site";
+import { getCollection } from "astro:content";
+
+const products = await getCollection("products");
+---
+
+<footer class="bg-footer-bg text-footer-text">
+  <div class="max-w-[1200px] mx-auto px-4 md:px-8 pt-16 pb-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-[1.4fr_1fr_1fr_1.2fr] gap-10">
+    <div>
+      <div class="font-heading font-extrabold text-[19px] text-white mb-3">{site.brandName}</div>
+      <p class="text-sm leading-7 text-footer-text-secondary max-w-[280px] m-0">
+        Website pribadi sales consultant resmi untuk lini electric forklift & reach truck Jenix Industrial.
+      </p>
+    </div>
+    <div>
+      <div class="font-semibold text-white text-sm mb-3.5">Navigasi</div>
+      <div class="flex flex-col gap-2.5">
+        <a href="/" class="text-footer-text-secondary text-sm">Beranda</a>
+        <a href="/produk/" class="text-footer-text-secondary text-sm">Produk</a>
+        <a href="/tentang/" class="text-footer-text-secondary text-sm">Tentang Kami</a>
+        <a href="/kontak/" class="text-footer-text-secondary text-sm">Kontak Kami</a>
+      </div>
+    </div>
+    <div>
+      <div class="font-semibold text-white text-sm mb-3.5">Produk</div>
+      <div class="flex flex-col gap-2.5">
+        {
+          products.map((p) => (
+            <a href={`/produk/${p.data.slug}/`} class="text-footer-text-secondary text-sm">
+              {p.data.name}
+            </a>
+          ))
+        }
+      </div>
+    </div>
+    <div>
+      <div class="font-semibold text-white text-sm mb-3.5">Kontak</div>
+      <div class="flex flex-col gap-2.5 text-sm text-footer-text-secondary">
+        <a href={`https://wa.me/${site.whatsappNumber}`} class="text-footer-text-secondary">WhatsApp: {site.whatsappDisplay}</a>
+        <a href={`mailto:${site.email}`} class="text-footer-text-secondary">{site.email}</a>
+        <span>{site.address}</span>
+        <div class="flex gap-3.5 mt-1">
+          <a href={site.instagramUrl} class="text-white">Instagram</a>
+          <a href={site.linkedinUrl} class="text-white">LinkedIn</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="border-t border-white/10 py-5 px-8 text-center text-[12.5px] text-footer-muted">
+    © 2026 Jenix Industrial — Reza Pratama, Sales Consultant. Website pribadi non-transaksional.
+  </div>
+</footer>

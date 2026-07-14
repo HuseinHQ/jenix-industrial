@@ -1,0 +1,71 @@
+---
+import Layout from "../layouts/Layout.astro";
+import ImagePlaceholder from "../components/ImagePlaceholder.astro";
+import WhatsAppForm from "../components/WhatsAppForm.astro";
+import { site } from "../data/site";
+
+const contactCards = [
+  { icon: "WA", label: "WhatsApp", value: site.whatsappDisplay, href: `https://wa.me/${site.whatsappNumber}` },
+  { icon: "@", label: "Email", value: site.email, href: `mailto:${site.email}` },
+];
+---
+
+<Layout
+  activePage="kontak"
+  title="Kontak Kami — Jenix Industrial"
+  description="Hubungi Reza Pratama untuk konsultasi unit electric forklift Jenix Industrial."
+>
+  <section class="max-w-[1200px] mx-auto px-4 md:px-8 pt-12 md:pt-16 pb-2">
+    <span class="text-[12.5px] font-bold text-accent tracking-[0.08em] uppercase">Kontak Kami</span>
+    <h1 class="font-heading font-extrabold text-[32px] sm:text-[40px] text-navy mt-3 mb-4">
+      Mari Diskusikan Kebutuhan Forklift Anda
+    </h1>
+    <p class="text-base leading-[1.7] text-text-secondary max-w-[640px] m-0">
+      Isi form di samping atau hubungi langsung — pesan Anda akan saya terima via WhatsApp agar bisa direspons cepat.
+    </p>
+  </section>
+
+  <section class="max-w-[1200px] mx-auto px-4 md:px-8 pt-12 pb-20 grid grid-cols-1 lg:grid-cols-[0.9fr_1.1fr] gap-10 lg:gap-14 items-start">
+    <div>
+      <div class="flex flex-col gap-4.5 mb-7">
+        {
+          contactCards.map((card) => (
+            <a href={card.href} class="flex gap-4 items-center bg-surface border border-border rounded-2xl px-5 py-4.5">
+              <div class="flex-none w-11 h-11 rounded-full bg-navy/8 flex items-center justify-center text-navy font-bold text-[15px]">
+                {card.icon}
+              </div>
+              <div>
+                <div class="text-[12.5px] text-text-secondary mb-1">{card.label}</div>
+                <div class="font-semibold text-text text-[15px]">{card.value}</div>
+              </div>
+            </a>
+          ))
+        }
+        <div class="flex gap-4 items-center bg-surface border border-border rounded-2xl px-5 py-4.5">
+          <div class="flex-none w-11 h-11 rounded-full bg-navy/8 flex items-center justify-center text-navy font-bold text-[15px]">
+            📍
+          </div>
+          <div>
+            <div class="text-[12.5px] text-text-secondary mb-1">Alamat</div>
+            <div class="font-semibold text-text text-[15px]">{site.address}</div>
+          </div>
+        </div>
+        <div class="flex gap-4 items-center bg-surface border border-border rounded-2xl px-5 py-4.5">
+          <div class="flex-none w-11 h-11 rounded-full bg-navy/8 flex items-center justify-center text-navy font-bold text-[15px]">
+            IG
+          </div>
+          <div class="flex flex-col gap-1">
+            <div class="text-[12.5px] text-text-secondary">Media Sosial</div>
+            <div class="flex gap-3.5">
+              <a href={site.instagramUrl} class="font-semibold text-[14.5px]">Instagram</a>
+              <a href={site.linkedinUrl} class="font-semibold text-[14.5px]">LinkedIn</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <ImagePlaceholder caption="Peta lokasi kantor/gudang" rounded="md" class="w-full h-[220px]" />
+    </div>
+
+    <WhatsAppForm />
+  </section>
+</Layout>

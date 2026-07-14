@@ -1,0 +1,84 @@
+---
+import Layout from "../layouts/Layout.astro";
+import ImagePlaceholder from "../components/ImagePlaceholder.astro";
+import { site, waLink } from "../data/site";
+
+const whyReasons = [
+  { num: "01", title: "Konsultasi Jujur", desc: "Rekomendasi sesuai kebutuhan riil, bukan sekadar menjual unit termahal." },
+  { num: "02", title: "Pendampingan Purna Jual", desc: "Tetap bisa dihubungi setelah unit terkirim, untuk perawatan maupun kendala teknis." },
+  { num: "03", title: "Respons Personal", desc: "Chat langsung dengan saya, bukan bot atau tim CS bergilir." },
+];
+
+const stories = [
+  "Saya sudah lebih dari 8 tahun berkecimpung di industri alat penanganan material, dan sejak lima tahun terakhir fokus membantu pelaku usaha beralih ke forklift listrik — mulai dari UKM pergudangan sampai perusahaan distribusi skala nasional.",
+  "Sebagai sales consultant resmi Jenix Industrial, tugas saya bukan cuma menawarkan unit, tapi memastikan unit yang Anda pilih benar-benar sesuai kapasitas gudang, jenis muatan, dan anggaran operasional. Banyak klien saya awalnya ragu soal daya tahan baterai — saya bantu jelaskan dengan data dan pengalaman nyata di lapangan, bukan janji marketing.",
+  "Website ini adalah etalase pribadi saya — bukan toko online. Semua transaksi dan konsultasi tetap berlangsung personal, lewat percakapan langsung dengan saya.",
+];
+---
+
+<Layout
+  activePage="tentang"
+  title="Tentang Kami — Jenix Industrial"
+  description={`Kenali ${site.salesName}, sales consultant resmi Jenix Industrial.`}
+>
+  <section class="max-w-[1200px] mx-auto px-4 md:px-8 pt-12 md:pt-[72px] pb-16 grid grid-cols-1 lg:grid-cols-[0.85fr_1.15fr] gap-10 lg:gap-14 items-center">
+    <ImagePlaceholder caption={`Foto: ${site.salesName}`} rounded="xl" class="w-full h-[300px] lg:h-[420px]" />
+    <div>
+      <span class="text-[12.5px] font-bold text-accent tracking-[0.08em] uppercase">Tentang Kami</span>
+      <h1 class="font-heading font-extrabold text-[34px] sm:text-[42px] text-navy mt-3 mb-4.5 leading-[1.15]">{site.salesName}</h1>
+      <div class="text-base font-semibold text-text-secondary mb-5">Sales Consultant Resmi — Jenix Industrial</div>
+      <p class="text-[17px] leading-[1.7] text-text-secondary m-0 max-w-[480px]">
+        "Saya percaya keputusan membeli alat berat bukan cuma soal harga, tapi soal siapa yang menemani Anda setelah unit terkirim."
+      </p>
+    </div>
+  </section>
+
+  <section class="max-w-[760px] mx-auto px-4 md:px-8 pb-20 flex flex-col gap-5.5">
+    <h2 class="font-heading font-bold text-[24px] sm:text-[26px] text-navy m-0 mb-1">Cerita Singkat</h2>
+    {stories.map((paragraph) => <p class="text-base leading-[1.8] text-text m-0">{paragraph}</p>)}
+  </section>
+
+  <section class="bg-surface border-t border-b border-border">
+    <div class="max-w-[1200px] mx-auto px-4 md:px-8 py-16">
+      <h2 class="font-heading font-bold text-[24px] sm:text-[26px] text-navy m-0 mb-9">Kenapa Belanja Lewat Saya</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-7">
+        {
+          whyReasons.map((reason) => (
+            <div>
+              <div class="w-11 h-11 rounded-full bg-navy/8 flex items-center justify-center text-navy font-bold text-base mb-4">
+                {reason.num}
+              </div>
+              <div class="font-bold text-base text-navy mb-2">{reason.title}</div>
+              <p class="m-0 text-[14.5px] leading-relaxed text-text-secondary">{reason.desc}</p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="max-w-[1200px] mx-auto px-4 md:px-8 py-16 grid grid-cols-1 lg:grid-cols-[0.8fr_1.2fr] gap-10 lg:gap-14 items-center">
+    <ImagePlaceholder caption="Logo / brand mark Jenix Industrial" rounded="lg" class="w-full h-[220px]" />
+    <div>
+      <h2 class="font-heading font-bold text-[24px] sm:text-[26px] text-navy m-0 mb-4">Tentang Jenix Industrial</h2>
+      <p class="text-base leading-[1.75] text-text-secondary m-0">
+        Jenix Industrial adalah produsen forklift listrik dan reach truck yang fokus pada efisiensi energi dan keselamatan operator. Lini produknya dirancang untuk kebutuhan pergudangan modern — dari gudang ritel skala kecil hingga fasilitas distribusi berkapasitas besar.
+      </p>
+    </div>
+  </section>
+
+  <section class="bg-navy text-white px-4 md:px-8 py-16 md:py-[72px] text-center">
+    <h2 class="font-heading font-bold text-[26px] sm:text-[30px] m-0 mb-3.5">Ingin Ngobrol Dulu Sebelum Memutuskan?</h2>
+    <p class="text-base text-footer-text-secondary max-w-[520px] mx-auto mb-8 leading-relaxed">
+      Saya senang membantu diskusi tanpa tekanan — kirim pesan kapan saja.
+    </p>
+    <a
+      href={waLink("Halo Reza, saya ingin ngobrol soal forklift listrik.")}
+      target="_blank"
+      rel="noopener"
+      class="inline-block bg-white text-navy px-8 py-4 rounded-[10px] text-[15px] font-bold hover:opacity-90"
+    >
+      Chat via WhatsApp
+    </a>
+  </section>
+</Layout>

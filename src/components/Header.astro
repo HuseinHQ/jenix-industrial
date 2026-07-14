@@ -1,0 +1,71 @@
+---
+import { site, waLink } from "../data/site";
+
+interface Props {
+  activePage?: "beranda" | "produk" | "tentang" | "kontak";
+}
+
+const { activePage } = Astro.props;
+
+const navItems = [
+  { key: "beranda", label: "Beranda", href: "/" },
+  { key: "produk", label: "Produk", href: "/produk/" },
+  { key: "tentang", label: "Tentang Kami", href: "/tentang/" },
+  { key: "kontak", label: "Kontak Kami", href: "/kontak/" },
+];
+---
+
+<header class="sticky top-0 z-50 bg-bg border-b border-border">
+  <div class="max-w-[1200px] mx-auto px-4 md:px-8 py-5 flex items-center justify-between gap-6 flex-wrap">
+    <a href="/" class="flex flex-col leading-tight">
+      <span class="font-heading font-extrabold text-[19px] text-navy tracking-[0.01em]">{site.brandName}</span>
+      <span class="text-[10.5px] text-text-secondary tracking-[0.1em] uppercase">{site.brandTagline}</span>
+    </a>
+
+    <button
+      id="nav-toggle"
+      class="sm:hidden flex flex-col gap-1.5 p-2"
+      aria-label="Buka menu"
+      aria-expanded="false"
+      aria-controls="nav-menu"
+    >
+      <span class="block w-6 h-0.5 bg-navy"></span>
+      <span class="block w-6 h-0.5 bg-navy"></span>
+      <span class="block w-6 h-0.5 bg-navy"></span>
+    </button>
+
+    <nav
+      id="nav-menu"
+      class="hidden sm:flex items-center gap-7 w-full sm:w-auto flex-col sm:flex-row basis-full sm:basis-auto"
+    >
+      {
+        navItems.map((item) => (
+          <a
+            href={item.href}
+            class={`text-[15px] ${activePage === item.key ? "font-bold text-navy" : "font-medium text-text-secondary"}`}
+          >
+            {item.label}
+          </a>
+        ))
+      }
+    </nav>
+
+    <a
+      href={waLink(`Halo Reza, saya tertarik dengan unit forklift listrik Jenix Industrial.`)}
+      target="_blank"
+      rel="noopener"
+      class="bg-navy text-white px-6 py-3 rounded-full text-sm font-semibold whitespace-nowrap hover:opacity-90"
+    >
+      Chat WhatsApp
+    </a>
+  </div>
+</header>
+
+<script>
+  const toggle = document.getElementById("nav-toggle");
+  const menu = document.getElementById("nav-menu");
+  toggle?.addEventListener("click", () => {
+    const isOpen = menu?.classList.toggle("hidden") === false;
+    toggle.setAttribute("aria-expanded", String(isOpen));
+  });
+</script>

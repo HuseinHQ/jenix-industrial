@@ -1,0 +1,96 @@
+---
+import { site } from "../data/site";
+---
+
+<div class="bg-surface border border-border rounded-[20px] p-7 sm:p-9">
+  <div id="wa-form-view">
+    <div class="font-heading font-bold text-xl text-navy mb-6">Kirim Pesan</div>
+    <form id="wa-form" class="flex flex-col gap-4.5" novalidate>
+      <div>
+        <label for="nama" class="block text-[13.5px] font-semibold text-text mb-2">Nama</label>
+        <input
+          type="text"
+          id="nama"
+          name="nama"
+          placeholder="Nama Anda"
+          class="w-full box-border px-3.5 py-3 border border-border rounded-[10px] text-[14.5px] font-body"
+        />
+      </div>
+      <div>
+        <label for="nomor" class="block text-[13.5px] font-semibold text-text mb-2">Nomor WhatsApp</label>
+        <input
+          type="text"
+          id="nomor"
+          name="nomor"
+          placeholder="08xx-xxxx-xxxx"
+          class="w-full box-border px-3.5 py-3 border border-border rounded-[10px] text-[14.5px] font-body"
+        />
+      </div>
+      <div>
+        <label for="pesan" class="block text-[13.5px] font-semibold text-text mb-2">Pesan</label>
+        <textarea
+          id="pesan"
+          name="pesan"
+          placeholder="Ceritakan kebutuhan forklift Anda..."
+          rows="4"
+          class="w-full box-border px-3.5 py-3 border border-border rounded-[10px] text-[14.5px] font-body resize-y"
+        ></textarea>
+      </div>
+      <div id="wa-form-error" class="text-[#B3261E] text-[13.5px] hidden"></div>
+      <button
+        type="submit"
+        class="bg-navy text-white border-none p-4 rounded-[10px] text-[15px] font-semibold cursor-pointer font-body hover:opacity-90"
+      >
+        Kirim via WhatsApp
+      </button>
+    </form>
+  </div>
+
+  <div id="wa-success-view" class="hidden text-center py-10 px-2.5">
+    <div class="text-4xl mb-4">✅</div>
+    <div class="font-heading font-bold text-xl text-navy mb-2.5">Terima kasih!</div>
+    <p class="text-text-secondary text-[14.5px] leading-relaxed m-0 mb-5">
+      Tab WhatsApp baru sudah terbuka dengan pesan Anda. Jika tidak terbuka otomatis, klik tombol di bawah.
+    </p>
+    <a
+      id="wa-fallback-link"
+      href="#"
+      target="_blank"
+      rel="noopener"
+      class="inline-block bg-navy text-white px-6 py-3.5 rounded-[10px] text-sm font-semibold hover:opacity-90"
+    >
+      Buka WhatsApp
+    </a>
+  </div>
+</div>
+
+<script define:vars={{ whatsappNumber: site.whatsappNumber }}>
+  const formView = document.getElementById("wa-form-view");
+  const successView = document.getElementById("wa-success-view");
+  const form = document.getElementById("wa-form");
+  const errorEl = document.getElementById("wa-form-error");
+  const fallbackLink = document.getElementById("wa-fallback-link");
+
+  form?.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const data = new FormData(form);
+    const nama = String(data.get("nama") || "").trim();
+    const nomor = String(data.get("nomor") || "").trim();
+    const pesan = String(data.get("pesan") || "").trim();
+
+    if (!nama || !pesan) {
+      errorEl.textContent = "Mohon isi nama dan pesan sebelum mengirim.";
+      errorEl.classList.remove("hidden");
+      return;
+    }
+
+    errorEl.classList.add("hidden");
+    const text = `Halo Reza, saya ${nama}${nomor ? " (" + nomor + ")" : ""}. ${pesan}`;
+    const link = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(text)}`;
+    window.open(link, "_blank");
+
+    fallbackLink.setAttribute("href", link);
+    formView.classList.add("hidden");
+    successView.classList.remove("hidden");
+  });
+</script>

@@ -1,0 +1,23 @@
+---
+interface Props {
+  caption: string;
+  class?: string;
+  rounded?: "sm" | "md" | "lg" | "xl" | "none";
+}
+
+const { caption, class: className = "", rounded = "none" } = Astro.props;
+
+const roundedMap: Record<string, string> = {
+  none: "rounded-none",
+  sm: "rounded-xl",
+  md: "rounded-2xl",
+  lg: "rounded-[20px]",
+  xl: "rounded-[24px]",
+};
+---
+
+<div
+  class={`flex items-center justify-center text-center bg-[repeating-linear-gradient(135deg,#EFEBE3,#EFEBE3_10px,#E6E1D8_10px,#E6E1D8_20px)] text-[#8A8477] text-xs font-mono px-4 box-border ${roundedMap[rounded]} ${className}`}
+>
+  {caption}
+</div>

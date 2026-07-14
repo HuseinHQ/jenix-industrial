@@ -1,11 +1,104 @@
 ---
-import Welcome from '../components/Welcome.astro';
-import Layout from '../layouts/Layout.astro';
+import Layout from "../layouts/Layout.astro";
+import ImagePlaceholder from "../components/ImagePlaceholder.astro";
+import ProductCard from "../components/ProductCard.astro";
+import { site, waLink } from "../data/site";
+import { getCollection } from "astro:content";
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+const allProducts = await getCollection("products");
+const featuredProducts = allProducts.slice(0, 3);
+
+const valueProps = [
+  { num: "01", title: "Unit Siap Pakai", desc: "Setiap unit diperiksa sebelum dikirim ke lokasi Anda." },
+  { num: "02", title: "Bergaransi Resmi", desc: "Garansi unit dan dukungan suku cadang dari Jenix Industrial." },
+  { num: "03", title: "Respons Cepat", desc: "Konsultasi & penawaran langsung lewat WhatsApp, biasanya dalam hitungan jam." },
+];
 ---
 
-<Layout>
-	<Welcome />
+<Layout activePage="beranda">
+  <section class="max-w-[1200px] mx-auto px-4 md:px-8 pt-12 md:pt-[72px] pb-16 grid grid-cols-1 lg:grid-cols-[1.05fr_1fr] gap-12 lg:gap-16 items-center">
+    <div>
+      <span class="inline-block bg-accent-bg text-accent text-xs font-semibold px-3.5 py-2 rounded-full tracking-[0.04em] uppercase mb-5.5">
+        Sales Consultant Resmi
+      </span>
+      <h1 class="font-heading font-extrabold text-[36px] sm:text-[44px] lg:text-[50px] leading-[1.1] tracking-[-0.01em] m-0 mb-5 text-navy">
+        Forklift Listrik yang Siap Kerja, Bukan Sekadar Dijual.
+      </h1>
+      <p class="text-lg leading-[1.65] text-text-secondary max-w-[480px] m-0 mb-9">
+        Saya {site.salesName}, membantu bisnis Anda memilih unit electric forklift Jenix Industrial yang tepat — dari konsultasi kebutuhan sampai layanan purna jual.
+      </p>
+      <div class="flex gap-4 flex-wrap">
+        <a href="/produk/" class="bg-navy text-white px-7 py-4 rounded-[10px] text-[15px] font-semibold hover:opacity-90">
+          Lihat Katalog Produk
+        </a>
+        <a
+          href={waLink("Halo Reza, saya ingin konsultasi soal forklift listrik.")}
+          target="_blank"
+          rel="noopener"
+          class="border-[1.5px] border-navy text-navy px-7 py-4 rounded-[10px] text-[15px] font-semibold hover:bg-navy/5"
+        >
+          Chat via WhatsApp
+        </a>
+      </div>
+    </div>
+    <ImagePlaceholder caption="Foto: Reza bersama unit forklift listrik" rounded="xl" class="w-full h-[300px] lg:h-[460px]" />
+  </section>
+
+  <section class="max-w-[1200px] mx-auto px-4 md:px-8 py-9 grid grid-cols-1 sm:grid-cols-3 gap-7 border-t border-b border-border">
+    {
+      valueProps.map((v) => (
+        <div class="flex gap-4">
+          <div class="flex-none w-11 h-11 rounded-full bg-navy/8 flex items-center justify-center text-navy font-bold text-base">
+            {v.num}
+          </div>
+          <div>
+            <div class="font-bold text-base text-navy mb-1.5">{v.title}</div>
+            <p class="m-0 text-[14.5px] leading-relaxed text-text-secondary">{v.desc}</p>
+          </div>
+        </div>
+      ))
+    }
+  </section>
+
+  <section class="max-w-[1200px] mx-auto px-4 md:px-8 py-16 md:py-20">
+    <div class="flex justify-between items-end mb-10 flex-wrap gap-4">
+      <div>
+        <span class="text-[12.5px] font-bold text-accent tracking-[0.08em] uppercase">Katalog Produk</span>
+        <h2 class="font-heading font-bold text-[28px] sm:text-[32px] text-navy mt-2.5 mb-0">Unit Electric Forklift Pilihan</h2>
+      </div>
+      <a href="/produk/" class="font-semibold text-[15px]">Lihat semua produk →</a>
+    </div>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-7">
+      {featuredProducts.map((product) => <ProductCard product={product} variant="compact" />)}
+    </div>
+  </section>
+
+  <section class="bg-surface border-t border-b border-border">
+    <div class="max-w-[1200px] mx-auto px-4 md:px-8 py-16 md:py-20 grid grid-cols-1 lg:grid-cols-[0.8fr_1.2fr] gap-10 lg:gap-14 items-center">
+      <ImagePlaceholder caption="Foto: Reza Pratama" rounded="lg" class="w-full h-[240px] lg:h-[320px]" />
+      <div>
+        <span class="text-[12.5px] font-bold text-accent tracking-[0.08em] uppercase">Kenalan Dulu Yuk</span>
+        <h2 class="font-heading font-bold text-[26px] sm:text-[30px] text-navy mt-2.5 mb-4">Bukan Website Perusahaan Biasa</h2>
+        <p class="text-base leading-[1.7] text-text-secondary m-0 mb-5 max-w-[560px]">
+          Ini website pribadi saya sebagai sales consultant Jenix Industrial — tempat Anda bisa langsung kenal siapa yang membantu, bukan sekadar formulir tanpa wajah. Saya bantu dari konsultasi kebutuhan, penawaran, sampai layanan setelah unit terkirim.
+        </p>
+        <a href="/tentang/" class="font-semibold text-[15px]">Baca selengkapnya tentang saya →</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-navy text-white px-4 md:px-8 py-16 md:py-[72px] text-center">
+    <h2 class="font-heading font-bold text-[26px] sm:text-[30px] m-0 mb-3.5">Butuh Armada Forklift Listrik untuk Operasional Anda?</h2>
+    <p class="text-base text-footer-text-secondary max-w-[520px] mx-auto mb-8 leading-relaxed">
+      Ceritakan kebutuhan Anda, saya bantu rekomendasikan unit yang paling pas — tanpa basa-basi jualan.
+    </p>
+    <a
+      href={waLink("Halo Reza, saya ingin konsultasi soal forklift listrik.")}
+      target="_blank"
+      rel="noopener"
+      class="inline-block bg-white text-navy px-8 py-4 rounded-[10px] text-[15px] font-bold hover:opacity-90"
+    >
+      Konsultasi Gratis via WhatsApp
+    </a>
+  </section>
 </Layout>

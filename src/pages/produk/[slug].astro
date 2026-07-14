@@ -1,0 +1,113 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import ImagePlaceholder from "../../components/ImagePlaceholder.astro";
+import ProductCard from "../../components/ProductCard.astro";
+import { waLink } from "../../data/site";
+import { getCollection } from "astro:content";
+
+export async function getStaticPaths() {
+  const products = await getCollection("products");
+  return products.map((product) => ({
+    params: { slug: product.data.slug },
+    props: { product, allProducts: products },
+  }));
+}
+
+const { product, allProducts } = Astro.props;
+const p = product.data;
+const related = allProducts.filter((item) => item.data.slug !== p.slug).slice(0, 2);
+
+const specRows = [
+  { label: "Kapasitas Angkat", value: p.capacity },
+  { label: "Tinggi Angkat Maksimal", value: p.liftHeight },
+  { label: "Jenis Baterai", value: p.battery },
+  { label: "Waktu Pengisian", value: p.chargeTime },
+  { label: "Dimensi Unit (P x L x T)", value: p.dimensions },
+  { label: "Berat Unit", value: p.weight },
+  { label: "Rekomendasi Penggunaan", value: p.useCase },
+];
+---
+
+<Layout activePage="produk" title={`${p.name} — Jenix Industrial`} description={p.tagline}>
+  <div class="max-w-[1200px] mx-auto px-4 md:px-8 pt-7 text-[13.5px] text-text-secondary">
+    <a href="/" class="text-text-secondary">Beranda</a> / <a href="/produk/" class="text-text-secondary">Produk</a> / <span class="text-navy font-semibold">{p.name}</span>
+  </div>
+
+  <section class="max-w-[1200px] mx-auto px-4 md:px-8 pt-7 pb-16 grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-14">
+    <div class="min-w-0">
+      <ImagePlaceholder caption={`Foto utama: ${p.name}`} rounded="md" class="w-full h-[280px] sm:h-[380px]" />
+      <div class="grid grid-cols-3 gap-3.5 mt-3.5">
+        <ImagePlaceholder caption="Foto sudut lain" rounded="sm" class="w-full h-[100px]" />
+        <ImagePlaceholder caption="Foto sudut lain" rounded="sm" class="w-full h-[100px]" />
+        <ImagePlaceholder caption="Foto interior/panel" rounded="sm" class="w-full h-[100px]" />
+      </div>
+    </div>
+    <div>
+      <span class="text-[12.5px] font-bold text-accent tracking-[0.08em] uppercase">{p.category}</span>
+      <h1 class="font-heading font-extrabold text-[30px] sm:text-[36px] text-navy mt-3 mb-3.5">{p.name}</h1>
+      <p class="text-base leading-[1.7] text-text-secondary m-0 mb-6.5">{p.description}</p>
+
+      <div class="grid grid-cols-2 gap-3.5 mb-7">
+        <div class="bg-surface border border-border rounded-xl p-4">
+          <div class="text-[12.5px] text-text-secondary mb-1.5">Kapasitas Angkat</div>
+          <div class="font-bold text-navy text-base">{p.capacity}</div>
+        </div>
+        <div class="bg-surface border border-border rounded-xl p-4">
+          <div class="text-[12.5px] text-text-secondary mb-1.5">Tinggi Angkat</div>
+          <div class="font-bold text-navy text-base">{p.liftHeight}</div>
+        </div>
+        <div class="bg-surface border border-border rounded-xl p-4">
+          <div class="text-[12.5px] text-text-secondary mb-1.5">Baterai</div>
+          <div class="font-bold text-navy text-base">{p.battery}</div>
+        </div>
+        <div class="bg-surface border border-border rounded-xl p-4">
+          <div class="text-[12.5px] text-text-secondary mb-1.5">Waktu Isi Ulang</div>
+          <div class="font-bold text-navy text-base">{p.chargeTime}</div>
+        </div>
+      </div>
+
+      <div class="bg-navy/6 rounded-xl px-5 py-4.5 mb-6.5 text-sm text-navy">
+        Harga unit disesuaikan dengan konfigurasi & lokasi pengiriman — hubungi saya langsung untuk penawaran terbaru.
+      </div>
+
+      <div class="flex gap-3.5 flex-wrap">
+        <a
+          href={waLink(`Halo Reza, saya ingin tanya soal ${p.name}.`)}
+          target="_blank"
+          rel="noopener"
+          class="bg-navy text-white px-6.5 py-4 rounded-[10px] text-[15px] font-semibold hover:opacity-90"
+        >
+          Tanyakan Unit Ini via WhatsApp
+        </a>
+        <a href="/produk/" class="border-[1.5px] border-navy text-navy px-6.5 py-4 rounded-[10px] text-[15px] font-semibold hover:bg-navy/5">
+          Kembali ke Katalog
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="max-w-[1200px] mx-auto px-4 md:px-8 pb-20">
+    <h2 class="font-heading font-bold text-2xl text-navy m-0 mb-5.5">Spesifikasi Lengkap</h2>
+    <div class="bg-surface border border-border rounded-2xl overflow-hidden">
+      {
+        specRows.map((row, i) => (
+          <div class={`flex justify-between px-6 py-4 ${i < specRows.length - 1 ? "border-b border-border" : ""}`}>
+            <span class="text-text-secondary text-[14.5px]">{row.label}</span>
+            <span class="font-semibold text-[14.5px] text-right">{row.value}</span>
+          </div>
+        ))
+      }
+    </div>
+  </section>
+
+  {
+    related.length > 0 && (
+      <section class="max-w-[1200px] mx-auto px-4 md:px-8 pb-20">
+        <h2 class="font-heading font-bold text-2xl text-navy m-0 mb-5.5">Produk Lainnya</h2>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-7">
+          {related.map((item) => <ProductCard product={item} variant="compact" />)}
+        </div>
+      </section>
+    )
+  }
+</Layout>

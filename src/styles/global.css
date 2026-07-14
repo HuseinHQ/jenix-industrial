@@ -1,0 +1,36 @@
+@import "tailwindcss";
+
+@theme {
+  --font-heading: "Plus Jakarta Sans", sans-serif;
+  --font-body: "IBM Plex Sans", sans-serif;
+
+  --color-bg: #faf8f5;
+  --color-surface: #ffffff;
+  --color-text: #1e2126;
+  --color-text-secondary: #5b6472;
+  --color-navy: #14304d;
+  --color-navy-hover: #1f4e79;
+  --color-accent: #b8651f;
+  --color-accent-bg: rgba(224, 138, 60, 0.14);
+  --color-border: #e6e1d8;
+  --color-footer-bg: #14304d;
+  --color-footer-text: #d8dee6;
+  --color-footer-text-secondary: #aeb8c4;
+  --color-footer-muted: #8b96a5;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  background: var(--color-bg);
+  color: var(--color-text);
+}
+
+a {
+  color: var(--color-navy-hover);
+  text-decoration: none;
+}
+
+a:hover {
+  color: var(--color-navy);
+}

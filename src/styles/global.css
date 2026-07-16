@@ -26,11 +26,13 @@ body {
   color: var(--color-text);
 }
 
-a {
-  color: var(--color-navy-hover);
-  text-decoration: none;
-}
+@layer base {
+  a {
+    color: var(--color-navy-hover);
+    text-decoration: none;
+  }
 
-a:hover {
-  color: var(--color-navy);
+  a:hover {
+    color: var(--color-navy);
+  }
 }

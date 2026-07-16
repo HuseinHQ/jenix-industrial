@@ -32,7 +32,7 @@ const valueProps = [
           Lihat Katalog Produk
         </a>
         <a
-          href={waLink("Halo Reza, saya ingin konsultasi soal forklift listrik.")}
+          href={waLink(`Halo ${site.salesNickname}, saya ingin konsultasi soal forklift listrik.`)}
           target="_blank"
           rel="noopener"
           class="border-[1.5px] border-navy text-navy px-7 py-4 rounded-[10px] text-[15px] font-semibold hover:bg-navy/5"
@@ -41,7 +41,7 @@ const valueProps = [
         </a>
       </div>
     </div>
-    <ImagePlaceholder caption="Foto: Reza bersama unit forklift listrik" rounded="xl" class="w-full h-75 lg:h-115" />
+    <ImagePlaceholder caption={`Foto: ${site.salesName} bersama unit forklift listrik`} rounded="xl" class="w-full h-75 lg:h-115" />
   </section>
 
   <section class="max-w-300 mx-auto px-4 md:px-8 py-9 grid grid-cols-1 sm:grid-cols-3 gap-7 border-t border-b border-border">
@@ -93,7 +93,7 @@ const valueProps = [
       Ceritakan kebutuhan Anda, saya bantu rekomendasikan unit yang paling pas — tanpa basa-basi jualan.
     </p>
     <a
-      href={waLink("Halo Reza, saya ingin konsultasi soal forklift listrik.")}
+      href={waLink(`Halo ${site.salesNickname}, saya ingin konsultasi soal forklift listrik.`)}
       target="_blank"
       rel="noopener"
       class="inline-block bg-white text-navy px-8 py-4 rounded-[10px] text-[15px] font-bold hover:opacity-90"

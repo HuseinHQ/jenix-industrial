@@ -1,7 +1,7 @@
 ---
 import Layout from "../../layouts/Layout.astro";
 import ProductCard from "../../components/ProductCard.astro";
-import { waLink } from "../../data/site";
+import { site, waLink } from "../../data/site";
 import { getCollection } from "astro:content";
 
 const products = await getCollection("products");
@@ -12,27 +12,27 @@ const products = await getCollection("products");
   title="Produk — Jenix Industrial"
   description="Katalog unit electric forklift dan reach truck Jenix Industrial."
 >
-  <section class="max-w-[1200px] mx-auto px-4 md:px-8 pt-16 pb-2">
+  <section class="max-w-300 mx-auto px-4 md:px-8 pt-16 pb-2">
     <span class="text-[12.5px] font-bold text-accent tracking-[0.08em] uppercase">Katalog Produk</span>
     <h1 class="font-heading font-extrabold text-[32px] sm:text-[40px] text-navy mt-3 mb-4">
       Unit Electric Forklift Jenix Industrial
     </h1>
-    <p class="text-base leading-[1.7] text-text-secondary max-w-[640px] m-0">
+    <p class="text-base leading-[1.7] text-text-secondary max-w-160 m-0">
       Berikut lini unit yang paling sering saya rekomendasikan. Ketersediaan stok dapat berubah — hubungi saya langsung untuk info unit terbaru dan penawaran harga.
     </p>
   </section>
 
-  <section class="max-w-[1200px] mx-auto px-4 md:px-8 pt-12 pb-20 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-7">
+  <section class="max-w-300 mx-auto px-4 md:px-8 pt-12 pb-20 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-7">
     {products.map((product) => <ProductCard product={product} variant="detailed" />)}
   </section>
 
-  <section class="bg-navy text-white px-4 md:px-8 py-16 md:py-[72px] text-center">
+  <section class="bg-navy text-white px-4 md:px-8 py-16 md:py-18 text-center">
     <h2 class="font-heading font-bold text-[26px] sm:text-[30px] m-0 mb-3.5">Belum Yakin Unit Mana yang Cocok?</h2>
-    <p class="text-base text-footer-text-secondary max-w-[520px] mx-auto mb-8 leading-relaxed">
+    <p class="text-base text-footer-text-secondary max-w-130 mx-auto mb-8 leading-relaxed">
       Ceritakan kebutuhan operasional Anda, saya bantu bandingkan dan rekomendasikan unit yang paling sesuai.
     </p>
     <a
-      href={waLink("Halo Reza, saya ingin konsultasi soal forklift listrik.")}
+      href={waLink(`Halo ${site.salesNickname}, saya ingin konsultasi soal forklift listrik.`)}
       target="_blank"
       rel="noopener"
       class="inline-block bg-white text-navy px-8 py-4 rounded-[10px] text-[15px] font-bold hover:opacity-90"

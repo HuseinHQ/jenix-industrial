@@ -16,10 +16,10 @@ const navItems = [
 ---
 
 <header class="sticky top-0 z-50 bg-bg border-b border-border">
-  <div class="max-w-[1200px] mx-auto px-4 md:px-8 py-5 flex items-center justify-between gap-6 flex-wrap">
+  <div class="max-w-300 mx-auto px-4 md:px-8 py-5 flex items-center justify-between gap-6 flex-wrap">
     <a href="/" class="flex flex-col leading-tight">
       <span class="font-heading font-extrabold text-[19px] text-navy tracking-[0.01em]">{site.brandName}</span>
-      <span class="text-[10.5px] text-text-secondary tracking-[0.1em] uppercase">{site.brandTagline}</span>
+      <span class="text-[10.5px] text-text-secondary tracking-widest uppercase">{site.brandTagline}</span>
     </a>
 
     <button
@@ -50,14 +50,15 @@ const navItems = [
       }
     </nav>
 
-    <a
-      href={waLink(`Halo Reza, saya tertarik dengan unit forklift listrik Jenix Industrial.`)}
-      target="_blank"
-      rel="noopener"
-      class="bg-navy text-white px-6 py-3 rounded-full text-sm font-semibold whitespace-nowrap hover:opacity-90"
-    >
-      Chat WhatsApp
-    </a>
+
+      <a
+        href={waLink(`Halo ${site.salesNickname}, saya tertarik dengan unit forklift listrik Jenix Industrial.`)}
+        target="_blank"
+        rel="noopener"
+        class="bg-navy text-white px-6 py-3 rounded-full text-sm font-semibold whitespace-nowrap hover:opacity-90"
+      >
+        Chat WhatsApp
+      </a>
   </div>
 </header>
 

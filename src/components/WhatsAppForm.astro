@@ -85,7 +85,7 @@ import { site } from "../data/site";
     }
 
     errorEl.classList.add("hidden");
-    const text = `Halo Reza, saya ${nama}${nomor ? " (" + nomor + ")" : ""}. ${pesan}`;
+    const text = `Halo ${site.salesNickname}, saya ${nama}${nomor ? " (" + nomor + ")" : ""}. ${pesan}`;
     const link = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(text)}`;
     window.open(link, "_blank");
 

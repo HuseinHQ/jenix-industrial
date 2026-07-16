@@ -1,5 +1,6 @@
 export const site = {
   salesName: "Jefry Chandra",
+  salesNickname: "Jefry",
   brandName: "JENIX INDUSTRIAL",
   brandTagline: "Electric Forklift Specialist",
   whatsappNumber: "6281234635677",

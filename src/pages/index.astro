@@ -18,7 +18,7 @@ const organizationSchema = {
   "@context": "https://schema.org",
   "@type": "LocalBusiness",
   name: site.brandName,
-  description: "Sales consultant resmi forklift listrik (electric forklift) Jenix Industrial.",
+  description: "Distributor forklift listrik (electric forklift) Indonesia — Jenix Industrial.",
   url: Astro.site?.toString(),
   telephone: `+${site.whatsappNumber}`,
   email: site.email,
@@ -26,6 +26,10 @@ const organizationSchema = {
     "@type": "PostalAddress",
     streetAddress: site.address,
     addressCountry: "ID",
+  },
+  areaServed: {
+    "@type": "Country",
+    name: "Indonesia",
   },
   employee: {
     "@type": "Person",
@@ -37,8 +41,8 @@ const organizationSchema = {
 
 <Layout
   activePage="beranda"
-  title="Jenix Industrial — Jual Forklift Listrik & Electric Forklift Resmi"
-  description={`Jual forklift listrik (electric forklift) 2.0–3.8 ton dari Jenix Industrial. Konsultasi kebutuhan unit langsung dengan ${site.salesName} via WhatsApp — respons cepat, garansi resmi.`}
+  title="Forklift Listrik Indonesia — Jenix Industrial"
+  description="Distributor forklift listrik (electric forklift) Indonesia, kapasitas 2.0–3.8 ton. Konsultasi gratis via WhatsApp, respons cepat, garansi resmi."
 >
   <Fragment slot="head">
     <script type="application/ld+json" set:html={JSON.stringify(organizationSchema)} is:inline />
@@ -49,10 +53,10 @@ const organizationSchema = {
         Sales Consultant Resmi
       </span>
       <h1 class="font-heading font-extrabold text-[36px] sm:text-[44px] lg:text-[50px] leading-[1.1] tracking-[-0.01em] m-0 mb-5 text-navy">
-        Solusi Electric Forklift untuk Operasional yang Lebih Efisien.
+        Forklift Listrik Indonesia untuk Operasional yang Lebih Efisien.
       </h1>
       <p class="text-lg leading-[1.65] text-text-secondary max-w-120 m-0 mb-9">
-        Saya {site.salesName}, membantu bisnis Anda memilih unit electric forklift Jenix Industrial yang tepat — dari konsultasi kebutuhan sampai layanan purna jual.
+        Saya {site.salesName}, membantu bisnis di seluruh Indonesia memilih unit electric forklift Jenix Industrial yang tepat — dari konsultasi kebutuhan sampai layanan purna jual.
       </p>
       <div class="flex gap-4 flex-wrap">
         <a href="/produk/" class="bg-navy text-white px-7 py-4 rounded-[10px] text-[15px] font-semibold hover:opacity-90">

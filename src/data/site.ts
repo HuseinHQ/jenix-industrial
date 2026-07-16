@@ -6,7 +6,8 @@ export const site = {
   whatsappNumber: "6281234635677",
   whatsappDisplay: "+62 812-3463-5677",
   email: "jefry.chandra84@gmail.com",
-  address: "Jl. Industri Raya No. 88, Bekasi, Jawa Barat",
+  address:
+    "Lingkungan Industri Kecil, Jl. Raya Trosobo Blok Barat No.2, Tj. Anom, Tanjungsari, Taman, Sidoarjo Regency, Jawa Timur",
   instagramUrl: "#",
   linkedinUrl: "https://www.linkedin.com/in/jefry-chandra-05a62656/",
 };

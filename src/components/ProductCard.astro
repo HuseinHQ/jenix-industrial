@@ -18,6 +18,8 @@ const p = product.data;
           <Image
             src={p.image}
             alt={`${p.name} — forklift listrik ${p.general.ratedCapacity}`}
+            widths={[360, 480, 720]}
+            sizes="(min-width: 1024px) 360px, (min-width: 640px) 45vw, 100vw"
             class="w-full h-50 object-cover"
           />
         ) : (

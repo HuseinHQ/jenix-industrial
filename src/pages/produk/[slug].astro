@@ -117,6 +117,8 @@ const specSections = [
           <Image
             src={p.image}
             alt={`${p.name} — forklift listrik ${p.general.ratedCapacity}`}
+            widths={[600, 900, 1200]}
+            sizes="(min-width: 1024px) 600px, 100vw"
             class="w-full h-70 sm:h-95 object-contain bg-surface border border-border rounded-2xl"
           />
         ) : (

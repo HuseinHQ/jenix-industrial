@@ -56,7 +56,9 @@ const ogImageURL = new URL(image, Astro.site);
 	</head>
 	<body class="min-h-screen bg-bg text-text font-body">
 		<Header activePage={activePage} />
-		<slot />
+		<main>
+			<slot />
+		</main>
 		<Footer />
 	</body>
 </html>

@@ -18,13 +18,13 @@
   --color-text-secondary: #5b6472;
   --color-navy: #14304d;
   --color-navy-hover: #1f4e79;
-  --color-accent: #b8651f;
+  --color-accent: #95530f;
   --color-accent-bg: rgba(224, 138, 60, 0.14);
   --color-border: #e6e1d8;
   --color-footer-bg: #14304d;
   --color-footer-text: #d8dee6;
   --color-footer-text-secondary: #aeb8c4;
-  --color-footer-muted: #8b96a5;
+  --color-footer-muted: #909baa;
 }
 
 body {

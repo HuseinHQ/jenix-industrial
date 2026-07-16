@@ -16,7 +16,7 @@ const valueProps = [
 ---
 
 <Layout activePage="beranda">
-  <section class="max-w-[1200px] mx-auto px-4 md:px-8 pt-12 md:pt-[72px] pb-16 grid grid-cols-1 lg:grid-cols-[1.05fr_1fr] gap-12 lg:gap-16 items-center">
+  <section class="max-w-300 mx-auto px-4 md:px-8 pt-12 md:pt-18 pb-16 grid grid-cols-1 lg:grid-cols-[1.05fr_1fr] gap-12 lg:gap-16 items-center">
     <div>
       <span class="inline-block bg-accent-bg text-accent text-xs font-semibold px-3.5 py-2 rounded-full tracking-[0.04em] uppercase mb-5.5">
         Sales Consultant Resmi
@@ -24,7 +24,7 @@ const valueProps = [
       <h1 class="font-heading font-extrabold text-[36px] sm:text-[44px] lg:text-[50px] leading-[1.1] tracking-[-0.01em] m-0 mb-5 text-navy">
         Forklift Listrik yang Siap Kerja, Bukan Sekadar Dijual.
       </h1>
-      <p class="text-lg leading-[1.65] text-text-secondary max-w-[480px] m-0 mb-9">
+      <p class="text-lg leading-[1.65] text-text-secondary max-w-120 m-0 mb-9">
         Saya {site.salesName}, membantu bisnis Anda memilih unit electric forklift Jenix Industrial yang tepat — dari konsultasi kebutuhan sampai layanan purna jual.
       </p>
       <div class="flex gap-4 flex-wrap">
@@ -41,10 +41,10 @@ const valueProps = [
         </a>
       </div>
     </div>
-    <ImagePlaceholder caption="Foto: Reza bersama unit forklift listrik" rounded="xl" class="w-full h-[300px] lg:h-[460px]" />
+    <ImagePlaceholder caption="Foto: Reza bersama unit forklift listrik" rounded="xl" class="w-full h-75 lg:h-115" />
   </section>
 
-  <section class="max-w-[1200px] mx-auto px-4 md:px-8 py-9 grid grid-cols-1 sm:grid-cols-3 gap-7 border-t border-b border-border">
+  <section class="max-w-300 mx-auto px-4 md:px-8 py-9 grid grid-cols-1 sm:grid-cols-3 gap-7 border-t border-b border-border">
     {
       valueProps.map((v) => (
         <div class="flex gap-4">
@@ -60,7 +60,7 @@ const valueProps = [
     }
   </section>
 
-  <section class="max-w-[1200px] mx-auto px-4 md:px-8 py-16 md:py-20">
+  <section class="max-w-300 mx-auto px-4 md:px-8 py-16 md:py-20">
     <div class="flex justify-between items-end mb-10 flex-wrap gap-4">
       <div>
         <span class="text-[12.5px] font-bold text-accent tracking-[0.08em] uppercase">Katalog Produk</span>
@@ -74,12 +74,12 @@ const valueProps = [
   </section>
 
   <section class="bg-surface border-t border-b border-border">
-    <div class="max-w-[1200px] mx-auto px-4 md:px-8 py-16 md:py-20 grid grid-cols-1 lg:grid-cols-[0.8fr_1.2fr] gap-10 lg:gap-14 items-center">
-      <ImagePlaceholder caption="Foto: Reza Pratama" rounded="lg" class="w-full h-[240px] lg:h-[320px]" />
+    <div class="max-w-300 mx-auto px-4 md:px-8 py-16 md:py-20 grid grid-cols-1 lg:grid-cols-[0.8fr_1.2fr] gap-10 lg:gap-14 items-center">
+      <ImagePlaceholder caption={`Foto: ${site.salesName}`} rounded="lg" class="w-full h-60 lg:h-80" />
       <div>
         <span class="text-[12.5px] font-bold text-accent tracking-[0.08em] uppercase">Kenalan Dulu Yuk</span>
         <h2 class="font-heading font-bold text-[26px] sm:text-[30px] text-navy mt-2.5 mb-4">Bukan Website Perusahaan Biasa</h2>
-        <p class="text-base leading-[1.7] text-text-secondary m-0 mb-5 max-w-[560px]">
+        <p class="text-base leading-[1.7] text-text-secondary m-0 mb-5 max-w-140">
           Ini website pribadi saya sebagai sales consultant Jenix Industrial — tempat Anda bisa langsung kenal siapa yang membantu, bukan sekadar formulir tanpa wajah. Saya bantu dari konsultasi kebutuhan, penawaran, sampai layanan setelah unit terkirim.
         </p>
         <a href="/tentang/" class="font-semibold text-[15px]">Baca selengkapnya tentang saya →</a>
@@ -87,9 +87,9 @@ const valueProps = [
     </div>
   </section>
 
-  <section class="bg-navy text-white px-4 md:px-8 py-16 md:py-[72px] text-center">
+  <section class="bg-navy text-white px-4 md:px-8 py-16 md:py-18 text-center">
     <h2 class="font-heading font-bold text-[26px] sm:text-[30px] m-0 mb-3.5">Butuh Armada Forklift Listrik untuk Operasional Anda?</h2>
-    <p class="text-base text-footer-text-secondary max-w-[520px] mx-auto mb-8 leading-relaxed">
+    <p class="text-base text-footer-text-secondary max-w-130 mx-auto mb-8 leading-relaxed">
       Ceritakan kebutuhan Anda, saya bantu rekomendasikan unit yang paling pas — tanpa basa-basi jualan.
     </p>
     <a

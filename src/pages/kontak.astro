@@ -13,19 +13,19 @@ const contactCards = [
 <Layout
   activePage="kontak"
   title="Kontak Kami — Jenix Industrial"
-  description="Hubungi Reza Pratama untuk konsultasi unit electric forklift Jenix Industrial."
+  description={`Hubungi ${site.salesName} untuk konsultasi unit electric forklift Jenix Industrial.`}
 >
-  <section class="max-w-[1200px] mx-auto px-4 md:px-8 pt-12 md:pt-16 pb-2">
+  <section class="max-w-300 mx-auto px-4 md:px-8 pt-12 md:pt-16 pb-2">
     <span class="text-[12.5px] font-bold text-accent tracking-[0.08em] uppercase">Kontak Kami</span>
     <h1 class="font-heading font-extrabold text-[32px] sm:text-[40px] text-navy mt-3 mb-4">
       Mari Diskusikan Kebutuhan Forklift Anda
     </h1>
-    <p class="text-base leading-[1.7] text-text-secondary max-w-[640px] m-0">
+    <p class="text-base leading-[1.7] text-text-secondary max-w-140 m-0">
       Isi form di samping atau hubungi langsung — pesan Anda akan saya terima via WhatsApp agar bisa direspons cepat.
     </p>
   </section>
 
-  <section class="max-w-[1200px] mx-auto px-4 md:px-8 pt-12 pb-20 grid grid-cols-1 lg:grid-cols-[0.9fr_1.1fr] gap-10 lg:gap-14 items-start">
+  <section class="max-w-300 mx-auto px-4 md:px-8 pt-12 pb-20 grid grid-cols-1 lg:grid-cols-[0.9fr_1.1fr] gap-10 lg:gap-14 items-start">
     <div>
       <div class="flex flex-col gap-4.5 mb-7">
         {
@@ -63,7 +63,7 @@ const contactCards = [
           </div>
         </div>
       </div>
-      <ImagePlaceholder caption="Peta lokasi kantor/gudang" rounded="md" class="w-full h-[220px]" />
+      <ImagePlaceholder caption="Peta lokasi kantor/gudang" rounded="md" class="w-full h-55" />
     </div>
 
     <WhatsAppForm />

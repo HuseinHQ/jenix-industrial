@@ -36,7 +36,7 @@ const navItems = [
 
     <nav
       id="nav-menu"
-      class="hidden sm:flex items-center gap-7 w-full sm:w-auto flex-col sm:flex-row basis-full sm:basis-auto"
+      class="hidden flex-col items-center gap-7 w-full basis-full sm:flex sm:flex-row sm:w-auto sm:basis-auto"
     >
       {
         navItems.map((item) => (
@@ -66,7 +66,9 @@ const navItems = [
   const toggle = document.getElementById("nav-toggle");
   const menu = document.getElementById("nav-menu");
   toggle?.addEventListener("click", () => {
-    const isOpen = menu?.classList.toggle("hidden") === false;
+    const isOpen = menu?.classList.contains("hidden");
+    menu?.classList.toggle("hidden", !isOpen);
+    menu?.classList.toggle("flex", isOpen);
     toggle.setAttribute("aria-expanded", String(isOpen));
   });
 </script>

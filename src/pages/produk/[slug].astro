@@ -1,4 +1,6 @@
 ---
+import { Image } from "astro:assets";
+import { Icon } from "astro-icon/components";
 import Layout from "../../layouts/Layout.astro";
 import ImagePlaceholder from "../../components/ImagePlaceholder.astro";
 import ProductCard from "../../components/ProductCard.astro";
@@ -15,27 +17,112 @@ export async function getStaticPaths() {
 
 const { product, allProducts } = Astro.props;
 const p = product.data;
-const related = allProducts.filter((item) => item.data.slug !== p.slug).slice(0, 2);
+const related = allProducts.filter((item) => item.data.slug !== p.slug).slice(0, 3);
 
-const specRows = [
-  { label: "Kapasitas Angkat", value: p.capacity },
-  { label: "Tinggi Angkat Maksimal", value: p.liftHeight },
-  { label: "Jenis Baterai", value: p.battery },
-  { label: "Waktu Pengisian", value: p.chargeTime },
-  { label: "Dimensi Unit (P x L x T)", value: p.dimensions },
-  { label: "Berat Unit", value: p.weight },
-  { label: "Rekomendasi Penggunaan", value: p.useCase },
+const productSchema = {
+  "@context": "https://schema.org",
+  "@type": "Product",
+  name: p.name,
+  description: p.description,
+  category: p.category,
+  ...(p.image && { image: new URL(p.image.src, Astro.site).toString() }),
+  brand: {
+    "@type": "Brand",
+    name: "Jenix Industrial",
+  },
+  offers: {
+    "@type": "Offer",
+    availability: "https://schema.org/InStock",
+    itemCondition: "https://schema.org/NewCondition",
+    priceSpecification: {
+      "@type": "PriceSpecification",
+      description: "Hubungi sales untuk penawaran harga",
+    },
+  },
+};
+
+const specSections = [
+  {
+    title: "General",
+    rows: [
+      { label: "Rated Capacity (Q)", value: p.general.ratedCapacity },
+      { label: "Load Center (c)", value: p.general.loadCenter },
+    ],
+  },
+  {
+    title: "Dimensions",
+    rows: [
+      { label: "Max Height (with backrest)", value: p.dimensions.maxHeightWithBackrest },
+      { label: "STD Max Lifting Height", value: p.dimensions.stdMaxLiftingHeight },
+      { label: "Overhead Guard Height", value: p.dimensions.overheadGuardHeight },
+      { label: "Overall Length (with fork)", value: p.dimensions.overallLengthWithFork },
+      { label: "Wheelbase", value: p.dimensions.wheelbase },
+      { label: "Front Overhang", value: p.dimensions.frontOverhang },
+      { label: "Rear Overhang", value: p.dimensions.rearOverhang },
+      { label: "Min Ground Clearance (frame/mast)", value: p.dimensions.minGroundClearanceFrameMast },
+      { label: "Overall Width (outside)", value: p.dimensions.overallWidthOutside },
+      { label: "Adjusting Range of Fork", value: p.dimensions.adjustingRangeOfFork },
+      { label: "Fork Size (STD)", value: p.dimensions.forkSizeStd },
+      { label: "Front Tread", value: p.dimensions.frontTread },
+      { label: "Rear Wheel Tread", value: p.dimensions.rearWheelTread },
+      { label: "Min Turning Radius (outside)", value: p.dimensions.minTurningRadiusOutside },
+      { label: "Min Aisle Width, Pallet 1000x1200 (crossways)", value: p.dimensions.minAisleWidthPallet1000x1200Crossways },
+      { label: "Min Aisle Width, Pallet 800x1200 (lengthways)", value: p.dimensions.minAisleWidthPallet800x1200Lengthways },
+    ],
+  },
+  {
+    title: "Tyres",
+    rows: [
+      { label: "Wheels No. (F,R X-Driven wheels)", value: p.tyres.wheelsNoFRXDriven },
+      { label: "Tyre Type (F/R)", value: p.tyres.tyreTypeFR },
+      { label: "Tyre Size, Front", value: p.tyres.tyreSizeFront },
+      { label: "Tyre Size, Rear", value: p.tyres.tyreSizeRear },
+    ],
+  },
+  {
+    title: "Performance and Other Details",
+    rows: [
+      { label: "Max Travelling Speed (loaded/unloaded)", value: p.performance.maxTravellingSpeedLoadedUnloaded },
+      { label: "Lifting Speed (loaded/unloaded)", value: p.performance.liftingSpeedLoadedUnloaded },
+      { label: "Lowering Speed (loaded/unloaded)", value: p.performance.loweringSpeedLoadedUnloaded },
+      { label: "Max Gradability (loaded/unloaded)", value: p.performance.maxGradabilityLoadedUnloaded },
+      { label: "Service Weight (with oil & water)", value: p.performance.serviceWeightWithOilWater },
+      { label: "Axle Load F/R (loaded)", value: p.performance.axleLoadFRLoaded },
+      { label: "Axle Load F/R (unloaded)", value: p.performance.axleLoadFRUnloaded },
+      { label: "Drive Motor", value: p.performance.driveMotor },
+      { label: "Lift Motor", value: p.performance.liftMotor },
+      { label: "Battery (voltage/capacity)", value: p.performance.batteryVoltageCapacity },
+    ],
+  },
 ];
 ---
 
-<Layout activePage="produk" title={`${p.name} — Jenix Industrial`} description={p.tagline}>
+<Layout
+  activePage="produk"
+  title={`${p.name} — Forklift Listrik ${p.general.ratedCapacity} | Jenix Industrial`}
+  description={p.tagline}
+  image={p.image?.src}
+>
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={JSON.stringify(productSchema)} is:inline />
+  </Fragment>
   <div class="max-w-300 mx-auto px-4 md:px-8 pt-7 text-[13.5px] text-text-secondary">
     <a href="/" class="text-text-secondary">Beranda</a> / <a href="/produk/" class="text-text-secondary">Produk</a> / <span class="text-navy font-semibold">{p.name}</span>
   </div>
 
   <section class="max-w-300 mx-auto px-4 md:px-8 pt-7 pb-16 grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-14">
     <div class="min-w-0">
-      <ImagePlaceholder caption={`Foto utama: ${p.name}`} rounded="md" class="w-full h-70 sm:h-95" />
+      {
+        p.image ? (
+          <Image
+            src={p.image}
+            alt={`${p.name} — forklift listrik ${p.general.ratedCapacity}`}
+            class="w-full h-70 sm:h-95 object-contain bg-surface border border-border rounded-2xl"
+          />
+        ) : (
+          <ImagePlaceholder caption={`Foto utama: ${p.name}`} rounded="md" class="w-full h-70 sm:h-95" />
+        )
+      }
       <div class="grid grid-cols-3 gap-3.5 mt-3.5">
         <ImagePlaceholder caption="Foto sudut lain" rounded="sm" class="w-full h-25" />
         <ImagePlaceholder caption="Foto sudut lain" rounded="sm" class="w-full h-25" />
@@ -49,20 +136,24 @@ const specRows = [
 
       <div class="grid grid-cols-2 gap-3.5 mb-7">
         <div class="bg-surface border border-border rounded-xl p-4">
+          <Icon name="weight" class="w-5 h-5 text-accent mb-1.5" />
           <div class="text-[12.5px] text-text-secondary mb-1.5">Kapasitas Angkat</div>
-          <div class="font-bold text-navy text-base">{p.capacity}</div>
+          <div class="font-bold text-navy text-base">{p.general.ratedCapacity}</div>
         </div>
         <div class="bg-surface border border-border rounded-xl p-4">
+          <Icon name="height" class="w-5 h-5 text-accent mb-1.5" />
           <div class="text-[12.5px] text-text-secondary mb-1.5">Tinggi Angkat</div>
-          <div class="font-bold text-navy text-base">{p.liftHeight}</div>
+          <div class="font-bold text-navy text-base">{p.dimensions.stdMaxLiftingHeight}</div>
         </div>
         <div class="bg-surface border border-border rounded-xl p-4">
+          <Icon name="battery" class="w-5 h-5 text-accent mb-1.5" />
           <div class="text-[12.5px] text-text-secondary mb-1.5">Baterai</div>
-          <div class="font-bold text-navy text-base">{p.battery}</div>
+          <div class="font-bold text-navy text-base">{p.performance.batteryVoltageCapacity}</div>
         </div>
         <div class="bg-surface border border-border rounded-xl p-4">
-          <div class="text-[12.5px] text-text-secondary mb-1.5">Waktu Isi Ulang</div>
-          <div class="font-bold text-navy text-base">{p.chargeTime}</div>
+          <Icon name="engine" class="w-5 h-5 text-accent mb-1.5" />
+          <div class="text-[12.5px] text-text-secondary mb-1.5">Drive Motor</div>
+          <div class="font-bold text-navy text-base">{p.performance.driveMotor}</div>
         </div>
       </div>
 
@@ -88,12 +179,19 @@ const specRows = [
 
   <section class="max-w-300 mx-auto px-4 md:px-8 pb-20">
     <h2 class="font-heading font-bold text-2xl text-navy m-0 mb-5.5">Spesifikasi Lengkap</h2>
-    <div class="bg-surface border border-border rounded-2xl overflow-hidden">
+    <div class="flex flex-col gap-7">
       {
-        specRows.map((row, i) => (
-          <div class={`flex justify-between px-6 py-4 ${i < specRows.length - 1 ? "border-b border-border" : ""}`}>
-            <span class="text-text-secondary text-[14.5px]">{row.label}</span>
-            <span class="font-semibold text-[14.5px] text-right">{row.value}</span>
+        specSections.map((section) => (
+          <div class="bg-surface border border-border rounded-2xl overflow-hidden">
+            <div class="bg-navy/6 px-6 py-3">
+              <h3 class="font-heading font-bold text-[15px] text-navy m-0">{section.title}</h3>
+            </div>
+            {section.rows.map((row, i) => (
+              <div class={`flex justify-between px-6 py-4 ${i < section.rows.length - 1 ? "border-b border-border" : ""}`}>
+                <span class="text-text-secondary text-[14.5px]">{row.label}</span>
+                <span class="font-semibold text-[14.5px] text-right">{row.value}</span>
+              </div>
+            ))}
           </div>
         ))
       }
@@ -104,7 +202,7 @@ const specRows = [
     related.length > 0 && (
       <section class="max-w-300 mx-auto px-4 md:px-8 pb-20">
         <h2 class="font-heading font-bold text-2xl text-navy m-0 mb-5.5">Produk Lainnya</h2>
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-7">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-7">
           {related.map((item) => <ProductCard product={item} variant="compact" />)}
         </div>
       </section>

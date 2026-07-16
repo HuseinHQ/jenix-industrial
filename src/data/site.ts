@@ -8,7 +8,7 @@ export const site = {
   email: "jefry.chandra84@gmail.com",
   address: "Jl. Industri Raya No. 88, Bekasi, Jawa Barat",
   instagramUrl: "#",
-  linkedinUrl: "#",
+  linkedinUrl: "https://www.linkedin.com/in/jefry-chandra-05a62656/",
 };
 
 export function waLink(message: string) {

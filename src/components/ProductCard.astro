@@ -1,4 +1,5 @@
 ---
+import { Image } from "astro:assets";
 import ImagePlaceholder from "./ImagePlaceholder.astro";
 import type { CollectionEntry } from "astro:content";
 
@@ -12,7 +13,17 @@ const p = product.data;
 ---
 
 <div class="bg-surface border border-border rounded-2xl overflow-hidden flex flex-col">
-  <ImagePlaceholder caption="Foto produk" class="w-full h-50" />
+    {
+        p.image ? (
+          <Image
+            src={p.image}
+            alt={`${p.name} — forklift listrik ${p.general.ratedCapacity}`}
+            class="w-full h-50 object-cover"
+          />
+        ) : (
+          <ImagePlaceholder caption="Foto produk" class="w-full h-50" />
+        )
+      }
   <div class="p-6 flex flex-col flex-1">
     <div class="text-xs font-semibold text-text-secondary uppercase tracking-[0.04em] mb-2">{p.category}</div>
     <div class="font-heading font-bold text-[19px] text-navy mb-2.5">{p.name}</div>
@@ -23,15 +34,15 @@ const p = product.data;
         <div class="flex flex-col gap-2 py-4 border-t border-b border-border mb-4.5">
           <div class="flex justify-between text-[13.5px]">
             <span class="text-text-secondary">Kapasitas</span>
-            <span class="font-semibold text-text">{p.capacity}</span>
+            <span class="font-semibold text-text">{p.general.ratedCapacity}</span>
           </div>
           <div class="flex justify-between text-[13.5px]">
             <span class="text-text-secondary">Tinggi Angkat</span>
-            <span class="font-semibold text-text">{p.liftHeight}</span>
+            <span class="font-semibold text-text">{p.dimensions.stdMaxLiftingHeight}</span>
           </div>
           <div class="flex justify-between text-[13.5px]">
             <span class="text-text-secondary">Baterai</span>
-            <span class="font-semibold text-text">{p.battery}</span>
+            <span class="font-semibold text-text">{p.performance.batteryVoltageCapacity}</span>
           </div>
           <div class="flex justify-between text-[13.5px]">
             <span class="text-text-secondary">Cocok Untuk</span>
